@@ -20,6 +20,6 @@ macro_rules! DEBUG {
 
 #[macro_export]
 macro_rules! TRACE {
-    (type=>$tp:expr, $($msg:expr),*) => {{ println!("{}:{} - [{}] {}", file!(), line!(), $tp, concat!($($msg, " "), *)); }};
-    ($($msg:expr),*) => {{ println!("{}:{} - {}", file!(), line!(), concat!($($msg, " "), *)); }};
+    (type=>$tp:expr, $($arg:expr),*) => {{ println!("{}:{} - [{}] {}", file!(), line!(), $tp, [$(format!("{}", $arg),)*].connect(" ")); }};
+    ($($arg:expr),*) => {{ println!("{}:{} - {}", file!(), line!(), [$(format!("{}", $arg),)*].connect(" ")); }};
 }
