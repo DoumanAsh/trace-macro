@@ -134,6 +134,11 @@
 <span id="92">92</span>
 <span id="93">93</span>
 <span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! A crate with printing macros.</span>
 <span class='doccomment'>//!</span>
@@ -205,16 +210,21 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>///Prints with the following format: ```file!:line! - [TYPE:] [Message]```</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>///[Message] consist of macro&#39;s arguments concated into one stringified</span>
-<span class='doccomment'>///and each separated by white-space.</span>
+<span class='doccomment'>///[Message] can be one of the following items:</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>///* Serveral arguments which are going to be concated into one string with white-space as</span>
+<span class='doccomment'>///separator.</span>
+<span class='doccomment'>///* Single argument.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>///Arguments of macro MUST have a formated capabilities</span>
 <span class='doccomment'>///i.e. macro does not work with arrays and etc.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>TRACE</span> {
     (<span class='kw'>type</span><span class='op'>=&gt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tp</span>:<span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>expr</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}:{} - {}: {}&quot;</span>, <span class='macro'>file</span><span class='macro'>!</span>(), <span class='macro'>line</span><span class='macro'>!</span>(), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tp</span>, [$(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>),)<span class='op'>+</span>].<span class='ident'>connect</span>(<span class='string'>&quot; &quot;</span>)); }};
+    (<span class='kw'>type</span><span class='op'>=&gt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tp</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}:{} - {}: {}&quot;</span>, <span class='macro'>file</span><span class='macro'>!</span>(), <span class='macro'>line</span><span class='macro'>!</span>(), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tp</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>); }};
     (<span class='kw'>type</span><span class='op'>=&gt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tp</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}:{} - {}&quot;</span>, <span class='macro'>file</span><span class='macro'>!</span>(), <span class='macro'>line</span><span class='macro'>!</span>(), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tp</span>); }};
     ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>expr</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}:{} - {}&quot;</span>, <span class='macro'>file</span><span class='macro'>!</span>(), <span class='macro'>line</span><span class='macro'>!</span>(), [$(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>),)<span class='op'>+</span>].<span class='ident'>connect</span>(<span class='string'>&quot; &quot;</span>)); }};
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}:{} - {}&quot;</span>, <span class='macro'>file</span><span class='macro'>!</span>(), <span class='macro'>line</span><span class='macro'>!</span>(), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>); }};
     () <span class='op'>=&gt;</span> {{ <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}:{}&quot;</span>, <span class='macro'>file</span><span class='macro'>!</span>(), <span class='macro'>line</span><span class='macro'>!</span>()); }};
 }
 
