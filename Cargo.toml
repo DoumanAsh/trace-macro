@@ -1,9 +1,10 @@
 [package]
 name = "trace-macro"
-version = "0.3.0"
-authors = ["DoumanAsh <custparasite@gmx.se>"]
+version = "0.4.0"
+authors = ["Douman <custparasite@gmx.se>"]
 description = "Simple trace macros"
 repository = "https://github.com/DoumanAsh/trace-macro"
+documentation = "http://doumanash.github.io/trace-macro"
 license = "MIT"
 
 [lib]
