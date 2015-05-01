@@ -46,7 +46,7 @@
         </span><a id='src-4' href='../src/trace_macros/lib.rs.html#28-30'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>WARNING</span> {
-    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>TRACE</span><span class='macro'>!</span>(<span class='kw'>type</span> <span class='op'>=&gt;</span> <span class='string'>&quot;WARNING&quot;</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>),<span class='op'>+</span>); }};
+    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>DEBUG_TRACE</span><span class='macro'>!</span>(<span class='kw'>type</span> <span class='op'>=&gt;</span> <span class='string'>&quot;WARNING&quot;</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>),<span class='op'>+</span>); }};
 }
 </pre>
 <div class='docblock'><p>WARNING macro</p>
