@@ -1,6 +1,6 @@
 target
+./src
 Cargo.lock
-src
 tests
 Cargo.toml
 

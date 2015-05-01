@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API stability overview for the Rust `trace_macros` crate.">
-    <meta name="keywords" content="rust, rustlang, rust-lang">
+    <meta name="description" content="API documentation for the Rust `INFO!` macro in crate `trace_macros`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, INFO!">
 
-    <title>trace_macros - Stability dashboard</title>
+    <title>trace_macros::INFO! - Rust</title>
 
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
 
     
     
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'></p><script>window.sidebarCurrent = {name: 'trace_macros', ty: 'mod', relpath: ''};</script>
+        <p class='location'><a href='index.html'>trace_macros</a></p><script>window.sidebarCurrent = {name: 'INFO!', ty: 'macro', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -40,18 +40,19 @@
         </form>
     </nav>
 
-    <section id='main' class="content mod"><h1 class='fqn'>Stability dashboard: crate <a class='mod' href='index.html'>trace_macros</a></h1>
-This dashboard summarizes the stability levels for all of the public modules of
-the crate, according to the total number of items at each level in the module and
-its children (percentages total for trace_macros):
-<blockquote>
-<a class='stability Stable'></a> stable (0%),<br/>
-<a class='stability Unstable'></a> unstable (0%),<br/>
-<a class='stability Deprecated'></a> deprecated (0%),<br/>
-<a class='stability Unmarked'></a> unmarked (100%)
-</blockquote>
-The counts do not include methods or trait
-implementations that are visible only through a re-exported type.<table><tr><td><a href='index.html'>trace_macros</a></td><td class='summary-column'><span class='summary Stable' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Unstable' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Deprecated' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Unmarked' style='width: 100.0000%; display: inline-block'>&nbsp</span></td></tr></table></section>
+    <section id='main' class="content macro">
+<h1 class='fqn'><span class='in-band'><a href='index.html'>trace_macros</a>::<wbr><a class='macro' href=''>INFO!</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-6' href='../src/trace_macros/lib.rs.html#44-46'>[src]</a></span></h1>
+<pre class='rust macro'>
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>INFO</span> {
+    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>TRACE</span><span class='macro'>!</span>(<span class='kw'>type</span> <span class='op'>=&gt;</span> <span class='string'>&quot;INFO&quot;</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>),<span class='op'>+</span>); }};
+}
+</pre>
+<div class='docblock'><p>INFO macro</p>
+
+<p>Prints with the following format: <code>file!:line! - INFO: [Message]</code></p>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -90,13 +91,13 @@ implementations that are visible only through a re-exported type.<table><tr><td>
     
 
     <script>
-        window.rootPath = "";
+        window.rootPath = "../";
         window.currentCrate = "trace_macros";
         window.playgroundUrl = "";
     </script>
-    <script src="jquery.js"></script>
-    <script src="main.js"></script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
     
-    <script async src="search-index.js"></script>
+    <script async src="../search-index.js"></script>
 </body>
 </html>
