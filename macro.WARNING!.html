@@ -43,7 +43,7 @@
     <section id='main' class="content macro">
 <h1 class='fqn'><span class='in-band'><a href='index.html'>trace_macros</a>::<wbr><a class='macro' href=''>WARNING!</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-4' href='src/trace_macros/lib.rs.html#27-29'>[src]</a></span></h1>
+        </span><a id='src-4' href='lib.rs.html#28-30'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>WARNING</span> {
     ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>TRACE</span><span class='macro'>!</span>(<span class='kw'>type</span> <span class='op'>=&gt;</span> <span class='string'>&quot;WARNING&quot;</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>),<span class='op'>+</span>); }};
@@ -51,7 +51,7 @@
 </pre>
 <div class='docblock'><p>WARNING macro</p>
 
-<p>Prints with the following format: file!:line! - WARNING: [Message]</p>
+<p>Prints with the following format: <code>file!:line! - WARNING: [Message]</code></p>
 </div></section>
     <section id='search' class="content hidden"></section>
 

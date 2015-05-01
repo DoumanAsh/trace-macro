@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `ERROR!` macro in crate `trace_macros`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, ERROR!">
+    <meta name="description" content="API documentation for the Rust `strace!` macro in crate `trace_macros`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, strace!">
 
-    <title>trace_macros::ERROR! - Rust</title>
+    <title>trace_macros::strace! - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="main.css">
 
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>trace_macros</a></p><script>window.sidebarCurrent = {name: 'ERROR!', ty: 'macro', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='index.html'>trace_macros</a></p><script>window.sidebarCurrent = {name: 'strace!', ty: 'macro', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -41,17 +41,21 @@
     </nav>
 
     <section id='main' class="content macro">
-<h1 class='fqn'><span class='in-band'><a href='index.html'>trace_macros</a>::<wbr><a class='macro' href=''>ERROR!</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'><a href='index.html'>trace_macros</a>::<wbr><a class='macro' href=''>strace!</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-5' href='lib.rs.html#36-38'>[src]</a></span></h1>
+        </span><a id='src-10' href='lib.rs.html#91-94'>[src]</a></span></h1>
 <pre class='rust macro'>
-<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>ERROR</span> {
-    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>TRACE</span><span class='macro'>!</span>(<span class='kw'>type</span> <span class='op'>=&gt;</span> <span class='string'>&quot;ERROR&quot;</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>),<span class='op'>+</span>); }};
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>strace</span> {
+    (<span class='kw'>type</span><span class='op'>=&gt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tp</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}:{} - {}: {}&quot;</span>, <span class='macro'>file</span><span class='macro'>!</span>(), <span class='macro'>line</span><span class='macro'>!</span>(), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tp</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>); }};
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}:{} - {}&quot;</span>, <span class='macro'>file</span><span class='macro'>!</span>(), <span class='macro'>line</span><span class='macro'>!</span>(), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>); }};
 }
 </pre>
-<div class='docblock'><p>ERROR macro</p>
+<div class='docblock'><p>Simplified trace macro</p>
 
-<p>Prints with the following format: <code>file!:line! - ERROR: [Message]</code></p>
+<p>Prints with the following format: <code>file!:line! - [TYPE:] [Message]</code></p>
+
+<p>Arguments of macro MUST have a formated capabilities
+i.e. macro does not work with arrays and etc.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 

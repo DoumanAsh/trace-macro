@@ -1,1 +1,1 @@
-initSidebarItems({"macro":[["DEBUG!","DEBUG macro"],["ENTER!","ENTER macro"],["ERROR!","ERROR macro"],["INFO!","INFO macro"],["TRACE!","Main trace macro."],["WARNING!","WARNING macro"]]});
+initSidebarItems({"macro":[["DEBUG!","DEBUG macro"],["ENTER!","ENTER macro"],["ERROR!","ERROR macro"],["INFO!","INFO macro"],["TRACE!","Main trace macro."],["WARNING!","WARNING macro"],["strace!","Simplified trace macro"]]});
