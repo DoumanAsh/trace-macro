@@ -68,16 +68,21 @@ macro_rules! ENTER {
 ///
 ///Prints with the following format: ```file!:line! - [TYPE:] [Message]```
 ///
-///[Message] consist of macro's arguments concated into one stringified
-///and each separated by white-space.
+///[Message] can be one of the following items:
+///
+///* Serveral arguments which are going to be concated into one string with white-space as
+///separator.
+///* Single argument.
 ///
 ///Arguments of macro MUST have a formated capabilities
 ///i.e. macro does not work with arrays and etc.
 #[macro_export]
 macro_rules! TRACE {
     (type=>$tp:expr, $($arg:expr),+) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, [$(format!("{}", $arg),)+].connect(" ")); }};
+    (type=>$tp:expr, $msg:expr) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, $msg); }};
     (type=>$tp:expr) => {{ println!("{}:{} - {}", file!(), line!(), $tp); }};
     ($($arg:expr),+) => {{ println!("{}:{} - {}", file!(), line!(), [$(format!("{}", $arg),)+].connect(" ")); }};
+    ($msg:expr) => {{ println!("{}:{} - {}", file!(), line!(), $msg); }};
     () => {{ println!("{}:{}", file!(), line!()); }};
 }
 

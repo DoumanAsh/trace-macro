@@ -10,5 +10,6 @@ fn dummy() {
     INFO!("This", "is", "dummy", "test");
     TRACE!(1);
     TRACE!(type=>"ENTER");
+    TRACE!(type=>"INFO", "lolka");
     strace!("This is dummy test");
 }
