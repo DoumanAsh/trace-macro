@@ -26,7 +26,7 @@
 ///Prints with the following format: ```file!:line! - WARNING: [Message]```
 #[macro_export]
 macro_rules! WARNING {
-    ($($msg:expr),+) => {{ TRACE!(type => "WARNING", $($msg),+); }};
+    ($($msg:expr),+) => {{ DEBUG_TRACE!(type => "WARNING", $($msg),+); }};
 }
 
 ///ERROR macro
@@ -66,23 +66,53 @@ macro_rules! ENTER {
 
 ///Main trace macro.
 ///
-///Prints with the following format: ```file!:line! - [TYPE:] [Message]```
+///Prints with the following format: ```file!:line! - [type:] [Message]```
 ///
-///[Message] can be one of the following items:
+///Usage:
 ///
-///* Serveral arguments which are going to be concated into one string with white-space as
-///separator.
-///* Single argument.
+///* ```TRACE!(type=>[TYPE], sep=>[String], [arg1, arg2, ..., argN])```
+///* ```TRACE!(type=>[TYPE], [arg1, arg2, ..., argN])```
+///* ```TRACE!(sep=>[String], [arg1, arg2, ..., argN])```
+///* ```TRACE!([arg1, arg2, ..., argN])```
+///* ```TRACE!()```
 ///
-///Arguments of macro MUST have a formated capabilities
-///i.e. macro does not work with arrays and etc.
+///Arguments must have ```fmt::Display``` trait.
 #[macro_export]
 macro_rules! TRACE {
-    (type=>$tp:expr, $($arg:expr),+) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, [$(format!("{}", $arg),)+].connect(" ")); }};
+    (type=>$tp:expr, sep=>$sep:expr, $msg:expr) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, $msg); }};
+    (type=>$tp:expr, sep=>$sep:expr, $($arg:expr),+) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, [$(format!("{}", $arg),)+].connect($sep)); }};
     (type=>$tp:expr, $msg:expr) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, $msg); }};
+    (type=>$tp:expr, $($arg:expr),+) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, [$(format!("{}", $arg),)+].connect(" ")); }};
     (type=>$tp:expr) => {{ println!("{}:{} - {}", file!(), line!(), $tp); }};
-    ($($arg:expr),+) => {{ println!("{}:{} - {}", file!(), line!(), [$(format!("{}", $arg),)+].connect(" ")); }};
+    (sep=>$sep:expr, $($arg:expr),+) => {{ println!("{}:{} - {}", file!(), line!(), [$(format!("{}", $arg),)+].connect($sep)); }};
     ($msg:expr) => {{ println!("{}:{} - {}", file!(), line!(), $msg); }};
+    ($($arg:expr),+) => {{ println!("{}:{} - {}", file!(), line!(), [$(format!("{}", $arg),)+].connect(" ")); }};
+    () => {{ println!("{}:{}", file!(), line!()); }};
+}
+
+///Debug trace macro.
+///
+///Prints with the following format: ```file!:line! - [type:] [Message]```
+///
+///Usage:
+///
+///* ```TRACE!(type=>[TYPE], sep=>[String], [arg1, arg2, ..., argN])```
+///* ```TRACE!(type=>[TYPE], [arg1, arg2, ..., argN])```
+///* ```TRACE!(sep=>[String], [arg1, arg2, ..., argN])```
+///* ```TRACE!([arg1, arg2, ..., argN])```
+///* ```TRACE!()```
+///
+///It is the same as ```TRACE!``` except that it prints with ```fmt::Debug``` trait.
+#[macro_export]
+macro_rules! DEBUG_TRACE {
+    (type=>$tp:expr, sep=>$sep:expr, $msg:expr) => {{ println!("{}:{} - {}: {:?}", file!(), line!(), $tp, $msg); }};
+    (type=>$tp:expr, sep=>$sep:expr, $($arg:expr),+) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, [$(format!("{:?}", $arg),)+].connect($sep)); }};
+    (type=>$tp:expr, $msg:expr) => {{ println!("{}:{} - {}: {:?}", file!(), line!(), $tp, $msg); }};
+    (type=>$tp:expr, $($arg:expr),+) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, [$(format!("{:?}", $arg),)+].connect(" ")); }};
+    (type=>$tp:expr) => {{ println!("{}:{} - {}", file!(), line!(), $tp); }};
+    (sep=>$sep:expr, $($arg:expr),+) => {{ println!("{}:{} - {}", file!(), line!(), [$(format!("{:?}", $arg),)+].connect($sep)); }};
+    ($msg:expr) => {{ println!("{}:{} - {:?}", file!(), line!(), $msg); }};
+    ($($arg:expr),+) => {{ println!("{}:{} - {}", file!(), line!(), [$(format!("{:?}", $arg),)+].connect(" ")); }};
     () => {{ println!("{}:{}", file!(), line!()); }};
 }
 
@@ -90,8 +120,7 @@ macro_rules! TRACE {
 ///
 ///Prints with the following format: ```file!:line! - [TYPE:] [Message]```
 ///
-///Arguments of macro MUST have a formated capabilities
-///i.e. macro does not work with arrays and etc.
+///Argument must have ```fmt::Display``` trait.
 #[macro_export]
 macro_rules! strace {
     (type=>$tp:expr, $msg:expr) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, $msg); }};
