@@ -20,9 +20,10 @@
 //!}
 //! ```
 
+
 ///WARNING macro
 ///
-///Prints with the following format: file!:line! - WARNING: [Message]
+///Prints with the following format: ```file!:line! - WARNING: [Message]```
 #[macro_export]
 macro_rules! WARNING {
     ($($msg:expr),+) => {{ TRACE!(type => "WARNING", $($msg),+); }};
@@ -30,7 +31,7 @@ macro_rules! WARNING {
 
 ///ERROR macro
 ///
-///Prints with the following format: file!:line! - ERROR: [Message]
+///Prints with the following format: ```file!:line! - ERROR: [Message]```
 #[macro_export]
 macro_rules! ERROR {
     ($($msg:expr),+) => {{ TRACE!(type => "ERROR", $($msg),+); }};
@@ -38,7 +39,7 @@ macro_rules! ERROR {
 
 ///INFO macro
 ///
-///Prints with the following format: file!:line! - INFO: [Message]
+///Prints with the following format: ```file!:line! - INFO: [Message]```
 #[macro_export]
 macro_rules! INFO {
     ($($msg:expr),+) => {{ TRACE!(type => "INFO", $($msg),+); }};
@@ -46,7 +47,7 @@ macro_rules! INFO {
 
 ///DEBUG macro
 ///
-///Prints with the following format: file!:line! - DEBUG: [Message]
+///Prints with the following format: ```file!:line! - DEBUG: [Message]```
 #[macro_export]
 macro_rules! DEBUG {
     ($($msg:expr),+) => {{ TRACE!(type => "DEBUG", $($msg),+); }};
@@ -54,7 +55,7 @@ macro_rules! DEBUG {
 
 ///ENTER macro
 ///
-///Prints with the following format: file!:line! - ENTER: [arg_name=arg_value]
+///Prints with the following format: ```file!:line! - ENTER: [arg_name=arg_value]```
 ///
 ///It is assumed to be used to wrap function call so all arguments are stringified, if any
 #[macro_export]
@@ -65,7 +66,7 @@ macro_rules! ENTER {
 
 ///Main trace macro.
 ///
-///Prints with the following format: file!:line! - [TYPE:] [Message]
+///Prints with the following format: ```file!:line! - [TYPE:] [Message]```
 ///
 ///[Message] consist of macro's arguments concated into one stringified
 ///and each separated by white-space.
@@ -78,4 +79,16 @@ macro_rules! TRACE {
     (type=>$tp:expr) => {{ println!("{}:{} - {}", file!(), line!(), $tp); }};
     ($($arg:expr),+) => {{ println!("{}:{} - {}", file!(), line!(), [$(format!("{}", $arg),)+].connect(" ")); }};
     () => {{ println!("{}:{}", file!(), line!()); }};
+}
+
+///Simplified trace macro
+///
+///Prints with the following format: ```file!:line! - [TYPE:] [Message]```
+///
+///Arguments of macro MUST have a formated capabilities
+///i.e. macro does not work with arrays and etc.
+#[macro_export]
+macro_rules! strace {
+    (type=>$tp:expr, $msg:expr) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, $msg); }};
+    ($msg:expr) => {{ println!("{}:{} - {}", file!(), line!(), $msg); }};
 }

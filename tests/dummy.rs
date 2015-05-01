@@ -1,4 +1,4 @@
-#[macro_use(TRACE, INFO, ENTER)]
+#[macro_use(TRACE, strace, INFO, ENTER)]
 extern crate trace_macros;
 
 #[test]
@@ -10,4 +10,5 @@ fn dummy() {
     INFO!("This", "is", "dummy", "test");
     TRACE!(1);
     TRACE!(type=>"ENTER");
+    strace!("This is dummy test");
 }
