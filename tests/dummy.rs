@@ -1,4 +1,4 @@
-#[macro_use(TRACE, strace, INFO, ENTER, DEBUG_TRACE)]
+#[macro_use(connect_args, TRACE, strace, INFO, ENTER, DEBUG_TRACE)]
 extern crate trace_macros;
 
 #[test]
@@ -25,4 +25,13 @@ fn dummy() {
     DEBUG_TRACE!(type=>"INFO", sep=>"_", "lolka");
     DEBUG_TRACE!(type=>"INFO", sep=>"_", "lolka", 2);
     DEBUG_TRACE!(type=>"INFO", sep=>"_", "lolka", (1..22));
+}
+
+#[test]
+fn connect_args() {
+    assert_eq!(connect_args!(1, 2, 3), "1 2 3".to_string());
+    assert_eq!(connect_args!(sep=>"-", 1, 2, 3), "1-2-3".to_string());
+    assert_eq!(connect_args!(sep=>"+", 1, 2, 666), "1+2+666".to_string());
+    assert_eq!(connect_args!(666), "666".to_string());
+    assert_eq!(connect_args!(formatter=>"{:?}", sep=>"+", 1, 2, "KIK"), "1+2+\"KIK\"".to_string());
 }

@@ -126,3 +126,25 @@ macro_rules! strace {
     (type=>$tp:expr, $msg:expr) => {{ println!("{}:{} - {}: {}", file!(), line!(), $tp, $msg); }};
     ($msg:expr) => {{ println!("{}:{} - {}", file!(), line!(), $msg); }};
 }
+
+///Macro to concat several arguments into one string.
+///
+///Arguments:
+///
+///* ```sep``` is a string which is used to separate arguments. Default is white-space.
+///* ```formatter``` is a valid string to pass in ```format!``` . Default is ```"{}"```.
+///
+///Usage:
+///
+///* ```connect_args!(formatter=>[String], sep=>[String], [arg1, arg2, ..., argN])```
+///* ```connect_args!(sep=>[String], [arg1, arg2, ..., argN])```
+///* ```connect_args!(formatter=>[String], [arg1, arg2, ..., argN])```
+///* ```connect_args!([arg1, arg2, ..., argN])```
+#[macro_export]
+macro_rules! connect_args {
+    (formatter=>$fr:expr, sep=>$sep:expr, $($arg:expr),+) => { [$(format!($fr, $arg),)+].connect($sep) };
+    (sep=>$sep:expr, $($arg:expr),+) => { [$(format!("{:}", $arg),)+].connect($sep) };
+    (formatter=>$fr:expr, $($arg:expr),+) => { [$(format!($fr, $arg),)+].connect(" ") };
+    ($msg:expr) => { format!("{:}", $msg) };
+    ($($arg:expr),+) => { [$(format!("{:}", $arg),)+].connect(" ") };
+}
