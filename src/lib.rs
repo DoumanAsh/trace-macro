@@ -17,6 +17,7 @@
 //!    ENTER!();
 //!    TRACE!("I'm", "doing", "some", "lazy", "tracing");
 //!    TRACE!("Result:", double_var(2));
+//!    traceln!("2*2 = {}", double_var(2));
 //!}
 //! ```
 
@@ -127,6 +128,19 @@ macro_rules! traceln {
     (type=>$tp:expr, $($arg:tt)+) => {{ traceln!("{}: {}", $tp, format_args!($($arg)+)); }};
     (type=>$tp:expr) => {{ traceln!("{}", $tp); }};
     ($($arg:tt)+) => {{ println!("{}", format_args!("{}:{} - {}", file!(), line!(), format_args!($($arg)+))); }};
+}
+
+///Thread trace macro like ```println```
+///
+///It uses ```format_args!``` for creating formatted string from passed arguments.
+///
+///Prints with the following format: ```[thread_name] file!:line! - [type:] [Message]```
+///
+#[macro_export]
+macro_rules! th_trace {
+    (type=>$tp:expr, $($arg:tt)+) => {{ traceln!("{}: {}", $tp, format_args!($($arg)+)); }};
+    (type=>$tp:expr) => {{ traceln!("{}", $tp); }};
+    ($($arg:tt)+) => {{ println!("{}", format_args!("[{}] {}:{} - {}", std::thread::current().name().unwrap_or("none"), file!(), line!(), format_args!($($arg)+))); }};
 }
 
 ///WARNING macro which uses ```traceln!```

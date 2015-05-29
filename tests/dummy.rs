@@ -1,4 +1,4 @@
-#[macro_use(connect_args, TRACE, strace, INFO, ENTER, DEBUG_TRACE, traceln, info, enter)]
+#[macro_use(connect_args, TRACE, strace, INFO, ENTER, DEBUG_TRACE, traceln, info, enter, th_trace)]
 extern crate trace_macros;
 
 #[test]
@@ -30,6 +30,7 @@ fn dummy() {
     info!("{}: {}", "test", "macro");
     traceln!(type=>"ENTER", "{}", format_args!("lolka {}", 1));
     enter!(a, b);
+    th_trace!("ololo {} + {} = {}", a, b, concat!(5, "string"));
 }
 
 #[test]
