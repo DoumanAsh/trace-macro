@@ -138,8 +138,8 @@ macro_rules! traceln {
 ///
 #[macro_export]
 macro_rules! th_trace {
-    (type=>$tp:expr, $($arg:tt)+) => {{ traceln!("{}: {}", $tp, format_args!($($arg)+)); }};
-    (type=>$tp:expr) => {{ traceln!("{}", $tp); }};
+    (type=>$tp:expr, $($arg:tt)+) => {{ th_trace!("{}: {}", $tp, format_args!($($arg)+)); }};
+    (type=>$tp:expr) => {{ th_trace!("{}", $tp); }};
     ($($arg:tt)+) => {{ println!("{}", format_args!("[{}] {}:{} - {}", std::thread::current().name().unwrap_or("none"), file!(), line!(), format_args!($($arg)+))); }};
 }
 
