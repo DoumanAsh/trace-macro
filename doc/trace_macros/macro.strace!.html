@@ -43,7 +43,7 @@
     <section id='main' class="content macro">
 <h1 class='fqn'><span class='in-band'><a href='index.html'>trace_macros</a>::<wbr><a class='macro' href=''>strace!</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-11' href='../src/trace_macros/lib.rs.html#125-128'>[src]</a></span></h1>
+        </span><a id='src-17' href='../src/trace_macros/lib.rs.html#181-184'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>strace</span> {
     (<span class='kw'>type</span><span class='op'>=&gt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tp</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}:{} - {}: {}&quot;</span>, <span class='macro'>file</span><span class='macro'>!</span>(), <span class='macro'>line</span><span class='macro'>!</span>(), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tp</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>); }};

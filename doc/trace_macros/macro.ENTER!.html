@@ -50,7 +50,7 @@
     ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>TRACE</span><span class='macro'>!</span>(<span class='kw'>type</span> <span class='op'>=&gt;</span> <span class='string'>&quot;ENTER&quot;</span>, $(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}={}&quot;</span>, <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>)),<span class='op'>+</span>); }};
 }
 </pre>
-<div class='docblock'><p>ENTER macro</p>
+<div class='docblock'><p>ENTER macro which uses <code>TRACE!</code></p>
 
 <p>Prints with the following format: <code>file!:line! - ENTER: [arg_name=arg_value]</code></p>
 
