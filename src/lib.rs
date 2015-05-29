@@ -21,15 +21,15 @@
 //! ```
 
 
-///WARNING macro
+///WARNING macro which uses ```TRACE!```
 ///
 ///Prints with the following format: ```file!:line! - WARNING: [Message]```
 #[macro_export]
 macro_rules! WARNING {
-    ($($msg:expr),+) => {{ DEBUG_TRACE!(type => "WARNING", $($msg),+); }};
+    ($($msg:expr),+) => {{ TRACE!(type => "WARNING", $($msg),+); }};
 }
 
-///ERROR macro
+///ERROR macro which uses ```TRACE!```
 ///
 ///Prints with the following format: ```file!:line! - ERROR: [Message]```
 #[macro_export]
@@ -37,7 +37,7 @@ macro_rules! ERROR {
     ($($msg:expr),+) => {{ TRACE!(type => "ERROR", $($msg),+); }};
 }
 
-///INFO macro
+///INFO macro which uses ```TRACE!```
 ///
 ///Prints with the following format: ```file!:line! - INFO: [Message]```
 #[macro_export]
@@ -45,7 +45,7 @@ macro_rules! INFO {
     ($($msg:expr),+) => {{ TRACE!(type => "INFO", $($msg),+); }};
 }
 
-///DEBUG macro
+///DEBUG macro which uses ```TRACE!```
 ///
 ///Prints with the following format: ```file!:line! - DEBUG: [Message]```
 #[macro_export]
@@ -53,7 +53,7 @@ macro_rules! DEBUG {
     ($($msg:expr),+) => {{ TRACE!(type => "DEBUG", $($msg),+); }};
 }
 
-///ENTER macro
+///ENTER macro which uses ```TRACE!```
 ///
 ///Prints with the following format: ```file!:line! - ENTER: [arg_name=arg_value]```
 ///
@@ -64,7 +64,7 @@ macro_rules! ENTER {
     ($($msg:expr),+) => {{ TRACE!(type => "ENTER", $(format!("{}={}", stringify!($msg), $msg)),+); }};
 }
 
-///Main trace macro.
+///Trace macro which concats passed arguments into one string.
 ///
 ///Prints with the following format: ```file!:line! - [type:] [Message]```
 ///
@@ -90,7 +90,7 @@ macro_rules! TRACE {
     () => {{ println!("{}:{}", file!(), line!()); }};
 }
 
-///Debug trace macro.
+///Debug trace macro like ```TRACE!```
 ///
 ///Prints with the following format: ```file!:line! - [type:] [Message]```
 ///
@@ -114,6 +114,62 @@ macro_rules! DEBUG_TRACE {
     ($msg:expr) => {{ println!("{}:{} - {:?}", file!(), line!(), $msg); }};
     ($($arg:expr),+) => {{ println!("{}:{} - {}", file!(), line!(), [$(format!("{:?}", $arg),)+].connect(" ")); }};
     () => {{ println!("{}:{}", file!(), line!()); }};
+}
+
+///Trace macro like ```println```
+///
+///It uses ```format_args!``` for creating formatted string from passed arguments.
+///
+///Prints with the following format: ```file!:line! - [type:] [Message]```
+///
+#[macro_export]
+macro_rules! traceln {
+    (type=>$tp:expr, $($arg:tt)+) => {{ traceln!("{}: {}", $tp, format_args!($($arg)+)); }};
+    (type=>$tp:expr) => {{ traceln!("{}", $tp); }};
+    ($($arg:tt)+) => {{ println!("{}", format_args!("{}:{} - {}", file!(), line!(), format_args!($($arg)+))); }};
+}
+
+///WARNING macro which uses ```traceln!```
+///
+///Prints with the following format: ```file!:line! - WARNING: [Message]```
+#[macro_export]
+macro_rules! warning {
+    ($($msg:tt)+) => {{ traceln!(type=>"WARNING", $($msg)+); }};
+}
+
+///ERROR macro which uses ```traceln!```
+///
+///Prints with the following format: ```file!:line! - ERROR: [Message]```
+#[macro_export]
+macro_rules! error {
+    ($($msg:tt)+) => {{ traceln!(type=>"ERROR", $($msg)+); }};
+}
+
+///INFO macro which uses ```traceln!```
+///
+///Prints with the following format: ```file!:line! - INFO: [Message]```
+#[macro_export]
+macro_rules! info {
+    ($($msg:tt)+) => {{ traceln!(type=>"INFO", $($msg)+); }};
+}
+
+///DEBUG macro which uses ```traceln!```
+///
+///Prints with the following format: ```file!:line! - DEBUG: [Message]```
+#[macro_export]
+macro_rules! debug {
+    ($($msg:tt)+) => {{ traceln!(type=>"DEBUG", $($msg)+); }};
+}
+
+///ENTER macro which uses ```traceln!```
+///
+///Prints with the following format: ```file!:line! - ENTER: [arg_name=arg_value]```
+///
+///It is assumed to be used to wrap function call so all arguments are stringified, if any
+#[macro_export]
+macro_rules! enter {
+    () => {{ traceln!(type=>"ENTER"); }};
+    ($($msg:expr),+) => {{ traceln!(type=>"ENTER", "{}", [$(format!("{}={}", stringify!($msg), $msg)),+].connect(" ")); }};
 }
 
 ///Simplified trace macro
@@ -143,8 +199,8 @@ macro_rules! strace {
 #[macro_export]
 macro_rules! connect_args {
     (formatter=>$fr:expr, sep=>$sep:expr, $($arg:expr),+) => { [$(format!($fr, $arg),)+].connect($sep) };
-    (sep=>$sep:expr, $($arg:expr),+) => { [$(format!("{:}", $arg),)+].connect($sep) };
+    (sep=>$sep:expr, $($arg:expr),+) => { [$(format!("{}", $arg),)+].connect($sep) };
     (formatter=>$fr:expr, $($arg:expr),+) => { [$(format!($fr, $arg),)+].connect(" ") };
-    ($msg:expr) => { format!("{:}", $msg) };
-    ($($arg:expr),+) => { [$(format!("{:}", $arg),)+].connect(" ") };
+    ($msg:expr) => { format!("{}", $msg) };
+    ($($arg:expr),+) => { [$(format!("{}", $arg),)+].connect(" ") };
 }

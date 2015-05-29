@@ -1,6 +1,6 @@
 [package]
 name = "trace-macro"
-version = "0.8.0"
+version = "1.0.0"
 authors = ["Douman <custparasite@gmx.se>"]
 description = "Simple trace macros"
 repository = "https://github.com/DoumanAsh/trace-macro"
