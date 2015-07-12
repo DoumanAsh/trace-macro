@@ -2,7 +2,7 @@
 //!
 //! These macros aims to provide a simple and lazy way to print formatted traces.
 //!
-//! Simple example of usage:
+//!# Example:
 //!
 //! ```
 //! #[macro_use(TRACE, ENTER)]
