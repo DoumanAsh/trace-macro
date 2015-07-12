@@ -41,9 +41,11 @@
     </nav>
 
     <section id='main' class="content macro">
-<h1 class='fqn'><span class='in-band'><a href='index.html'>trace_macros</a>::<wbr><a class='macro' href=''>DEBUG!</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-7' href='../src/trace_macros/lib.rs.html#53-55'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'><a href='index.html'>trace_macros</a>::<wbr><a class='macro' href=''>DEBUG!</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-7' class='srclink' href='../src/trace_macros/lib.rs.html#53-55' title='goto source code'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>DEBUG</span> {
     ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {{ <span class='macro'>TRACE</span><span class='macro'>!</span>(<span class='kw'>type</span> <span class='op'>=&gt;</span> <span class='string'>&quot;DEBUG&quot;</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>),<span class='op'>+</span>); }};
@@ -84,6 +86,10 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>
